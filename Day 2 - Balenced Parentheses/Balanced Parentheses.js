@@ -25,6 +25,7 @@ function isBalancedParentheses  (input) {
 
 }
 
-let result = isBalancedParentheses("()");
+let expression = "()";
+let result = isBalancedParentheses(expression);
 
-result ? console.log("Valid", input) : console.log("Invalid", input);
+result ? console.log("Valid", expression) : console.log("Invalid", expression);
