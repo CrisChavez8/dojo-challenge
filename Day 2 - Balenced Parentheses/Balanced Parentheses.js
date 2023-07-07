@@ -28,4 +28,4 @@ function isBalancedParentheses  (input) {
 let expression = "()";
 let result = isBalancedParentheses(expression);
 
-result ? console.log("Valid", expression) : console.log("Invalid", expression);
+result ? console.log("Valid: ", expression) : console.log("Invalid: ", expression);
