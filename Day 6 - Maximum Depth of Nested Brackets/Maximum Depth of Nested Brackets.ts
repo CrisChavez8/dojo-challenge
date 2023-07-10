@@ -16,7 +16,7 @@ function findDeepestLevelSubString(str: string): string[] {
             }
         } else if (actualChar === ')') {
             const startIndex = openingBracketsIndices.pop();
-            if (currentLevel === maxLevel) {
+            if (startIndex !== undefined && currentLevel === maxLevel) {
                 deepestSubstrings.push(str.substring(startIndex + 1, i));
             }
             currentLevel--;
