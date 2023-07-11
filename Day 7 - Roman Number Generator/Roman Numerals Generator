@@ -1,0 +1,75 @@
+//   1 = I      5 = V       10 = X      L = 50      C = 100     D = 500     M = 1000
+//  IV = 4      IX = 9      XC = 90     CD = 400    LX = 60
+function generateTheRomanNumber(decimalNum: number): string {
+    if (decimalNum < 1 || decimalNum > 9999) {
+      throw new Error(
+        "Invalid input. Please provide a number between 1 and 9999."
+      );
+    }
+    let numberSplited: string[] = decimalNum.toString().split("").reverse(); // [5, 3, 2]
+    let numberParts: number[] = numberSplited
+      .map((value, i) =>
+        i === 1
+          ? parseInt(value) * 10
+          : i === 2
+          ? parseInt(value) * 100
+          : i === 3
+          ? parseInt(value) * 1000
+          : parseInt(value)
+      )
+      .reverse();
+    let romanListValues: Object = {
+      9000: "_VM_V",
+      5000: "_V",
+      4000: "M_V",
+      1000: "M",
+      900: "CM",
+      500: "D",
+      400: "CD",
+      100: "C",
+      90: "XC",
+      50: "L",
+      40: "XL",
+      10: "X",
+      9: "IX",
+      5: "V",
+      4: "IV",
+      1: "I",
+    };
+    let resultString: string = "";
+    for (let i: number = 0; i < numberParts.length; i++) {
+      let actualNumber = numberParts[i];
+      if (romanListValues.hasOwnProperty(actualNumber)) {
+        resultString += romanListValues[actualNumber];
+      } else {
+        Object.entries(romanListValues)
+          .reverse()
+          .forEach(([key, value], index) => {
+  
+              if (parseInt(key) <= actualNumber) {
+  
+                  let nChar = actualNumber / parseInt(key);
+  
+                  if (actualNumber % parseInt(key) === 0 && actualNumber != 0) {
+  
+                      for (let index = 0; index < nChar; index++) {
+                          resultString += value;
+                      }
+                      actualNumber = 0;
+  
+                  } else {
+                      actualNumber -= parseInt(key);
+                      resultString += value;
+                  }
+  
+              }
+  
+          });
+      }
+    }
+    return resultString + ' = ' + decimalNum ;
+  }
+  
+  //_VMDXXX
+  const decimalNumber: number = 6530;
+  console.log(generateTheRomanNumber(decimalNumber));
